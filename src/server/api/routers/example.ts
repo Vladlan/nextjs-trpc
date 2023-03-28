@@ -1,4 +1,5 @@
 import { z } from "zod";
+import fs from "fs/promises";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
@@ -10,4 +11,7 @@ export const exampleRouter = createTRPCRouter({
         greeting: `Hello ${input.text}`,
       };
     }),
+  exmpletsfile: publicProcedure.query(async () => {
+    return await fs.readFile("./src/server/api/routers/example.ts", "utf8");
+  }),
 });
